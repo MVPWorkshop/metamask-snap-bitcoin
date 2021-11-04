@@ -1,0 +1,12 @@
+.balance {
+	text-align: left;
+}
+
+h2.balance {
+	color: #7e94c8;
+}
+
+h3.balance {
+	color: #7e94c8;
+	font-weight: bolder;
+}

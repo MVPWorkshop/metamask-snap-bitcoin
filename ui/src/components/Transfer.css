@@ -1,0 +1,7 @@
+.transfer {
+	display: flex;
+	align-items: center;
+	/* border: 1px solid green; */
+	width: 320px;
+	justify-content: space-between;
+}

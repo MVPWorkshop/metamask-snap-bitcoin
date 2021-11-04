@@ -1,0 +1,54 @@
+.select {
+	position: relative;
+	display: inline-block;
+	margin-bottom: 15px;
+	width: 8%;
+}
+.select select {
+	display: inline-block;
+	font-weight: bold;
+	width: 100%;
+	cursor: pointer;
+	/* padding: 15px 15px; */
+	padding-top: 15px;
+	outline: 0;
+	border: 0px hidden #000000;
+	border-radius: 1px;
+	background: #ffffff;
+	color: #7f94c9;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+.select select::-ms-expand {
+	display: none;
+}
+.select select:hover,
+.select select:focus {
+	color: #7f94c9;
+	background: #ffffff;
+}
+.select select:disabled {
+	opacity: 0.5;
+	pointer-events: none;
+}
+.select_arrow {
+	position: absolute;
+	top: 16px;
+	right: 15px;
+	width: 0px;
+	height: 0px;
+	border: solid #7f94c9;
+	border-width: 0 3px 3px 0;
+	display: inline-block;
+	padding: 3px;
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+}
+.select select:hover ~ .select_arrow,
+.select select:focus ~ .select_arrow {
+	border-color: #7f94c9;
+}
+.select select:disabled ~ .select_arrow {
+	border-top-color: #7f94c9;
+}
