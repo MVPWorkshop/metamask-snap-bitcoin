@@ -1,0 +1,30 @@
+{
+  "name": "bitcoin-snap",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "description": "Metamask plugin for interacting with Bitcoin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MVPWorkshop/metamask-snap-bitcoin.git"
+  },
+  "scripts": {
+    "build": "mm-snap build",
+    "start": "mm-snap serve"
+  },
+  "dependencies": {
+    "bitcoinjs-lib": "^5.2.0",
+    "dotenv": "^10.0.0",
+    "node-fetch": "^2.0.0",
+    "snaps-cli": "^0.4.2"
+  },
+  "web3Wallet": {
+    "bundle": {
+      "local": "dist/bundle.js",
+      "url": "http://localhost:8081/dist/bundle.js"
+    },
+    "initialPermissions": {
+      "snap_confirm": {}
+    }
+  }
+}

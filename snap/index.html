@@ -1,0 +1,109 @@
+<!doctype html>
+
+<html>
+
+  </head>
+    <title>Bitcoin Snap</title>
+  </head>
+
+  <body>
+    <h1>Bitcoin Snap</h1>
+    <details>
+      <summary>Instructions</summary>
+      <ul>
+        <li>First, click "Connect". Then, try out the other buttons!</li>
+        <li>Please note that:</li>
+        <ul>
+          <li>
+            The Snap <b>package.json</b> must be located in located in the server root directory
+          </li>
+          <li>
+            The Snap bundle must be hosted at the location specified by <b>package.json:web3Wallet.bundle.url</b>
+          </li>
+        </ul>
+      </ul>
+    </details>
+    <br/>
+
+    <button class="connect">Connect</button>
+    <button class="getAddress">Get Address</button>
+    <button class="getBalance">Get Balance</button>
+    <select name="network" id="network">
+      <option value="bitcoin">Bitcoin</option>
+      <option value="testnet">TestNet</option>
+    </select>
+  </body>
+
+  <script>
+
+    // we identify the Snap by the location of its package.json file
+    const snapId = new URL('package.json', window.location.href).toString()
+
+    const connectButton = document.querySelector('button.connect')
+    const getAddressButton = document.querySelector('button.getAddress')
+    const getBalanceButton = document.querySelector('button.getBalance')
+    const networkDropdown = document.querySelector('#network')
+
+    connectButton.addEventListener('click', connect)
+    getAddressButton.addEventListener('click', getAccount)
+    getBalanceButton.addEventListener('click', getBalance)
+
+    let wallet;
+
+    // here we get permissions to interact with and install the plugin
+    async function connect () {
+      await ethereum.request({
+        method: 'wallet_enable',
+        params: [{
+          wallet_plugin: { [snapId]: {} },
+        }]
+      })
+    }
+
+    // get ethereum wallet address
+    async function getAccount () {
+      try {
+        const response = await ethereum.request({
+          method: 'wallet_invokePlugin',
+          params: [snapId, {
+            method: 'getAccount',
+            params: [networkDropdown.value]
+          }]
+        })
+
+        console.log(networkDropdown.value)
+
+        // alert('received back: ' + JSON.stringify(response))
+        wallet = JSON.stringify(response);
+        console.log(wallet);
+      } catch (err) {
+        console.error(err)
+        alert('Problem happened: ' + err.message || err)
+      }
+    }
+
+
+
+    async function getBalance () {
+      try {
+        const response = await ethereum.request({
+          method: 'wallet_invokePlugin',
+          params: [snapId, {
+            method: 'getBalance',
+            params: [wallet]
+          }]
+        })
+
+        console.log(wallet);
+        console.log(response);
+
+        alert('received back: ' + JSON.stringify(response))
+      } catch (err) {
+        console.error(err)
+        alert('Problem happened: ' + err.message || err)
+      }
+    }
+
+  </script>
+
+</html>
