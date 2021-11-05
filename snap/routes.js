@@ -1,4 +1,4 @@
-const getBalanceRoute = `${process.env.BTC_NODE_ENDPOINT}/getbalance`;
+const getBalanceRoute = `${process.env.BTC_NODE_ENDPOINT}/getBalance`;
 const sendToAddressRoute = `${process.env.BTC_NODE_ENDPOINT}/sendtoaddress`;
 const estimateFeeRoute = `${process.env.BTC_NODE_ENDPOINT}/estimatefee`;
 const broadcastRoute = `${process.env.BTC_NODE_ENDPOINT}/broadcast`;

@@ -1,0 +1,23 @@
+{
+	"name": "bitcoin-node",
+	"version": "1.0.0",
+	"description": "Bitcoin Node",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon index.js",
+		"run-node": "./bcoin/bin/bcoin",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [
+		"bitcoin"
+	],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"bcoin": "git+https://github.com/bcoin-org/bcoin.git#semver:~2.0.0",
+		"body-parser": "^1.19.0",
+		"dotenv": "^10.0.0",
+		"express": "^4.17.1",
+		"nodemon": "^2.0.14"
+	}
+}
