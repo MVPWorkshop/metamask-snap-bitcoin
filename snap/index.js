@@ -72,20 +72,17 @@ async function _getKeyPair() {
 }
 
 async function getBalance(_account, _network) {
-	const network =
-		_network === 'testnet'
-			? bitcoin.networks.testnet
-			: bitcoin.networks.bitcoin;
+	const network = _network === 'bitcoin' ? 'main' : 'testnet';
 
 	const response = await fetch(routes.getBalanceRoute, {
 		method: 'POST',
-		account: _account,
+		address: _account,
 		network: network,
 	});
 
-	const balance = await response.json();
+	const result = await response.json();
 
-	return balance;
+	return result.balance;
 }
 
 async function _createUtxoToSpend(_amount, _account) {
@@ -140,10 +137,14 @@ async function createTransaction(
 	// const keyPair = bitcoin.ECPair.fromPrivateKey(privateKeyBuffer);
 
 	// const estimatedFee = 0;
-	const estimatedFee = await fetch(routes.estimateFeeRoute, {
+	const response = await fetch(routes.estimateFeeRoute, {
 		method: 'POST',
-		blockConfirmations: _blockConfirmations,
+		blocks: _blockConfirmations,
+		network: _network === 'bitcoin' ? 'main' : 'testnet',
 	});
+	const result = await response.json();
+	const estimatedFee = result.fee;
+
 	const balance = getBalance();
 
 	txBuilder.addInput(txId, vout);
@@ -158,7 +159,8 @@ async function createTransaction(
 	// BROADCAST tx
 	await fetch(routes.broadcastRoute, {
 		method: 'POST',
-		transactionId: transactionId,
+		txHash: transactionId,
+		network: _network === 'bitcoin' ? 'main' : 'testnet',
 	});
 
 	return transactionId;
