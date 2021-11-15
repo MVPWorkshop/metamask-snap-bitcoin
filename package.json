@@ -1,0 +1,16 @@
+{
+	"name": "root",
+	"private": true,
+	"workspaces": [
+		"packages/*"
+	],
+	"scripts": {
+		"build:snap": "lerna run build:snap",
+		"run:node": "lerna run run:node &",
+		"prestart": "yarn run build:snap && yarn run run:node",
+		"start": "lerna run start"
+	},
+	"devDependencies": {
+		"lerna": "^4.0.0"
+	}
+}

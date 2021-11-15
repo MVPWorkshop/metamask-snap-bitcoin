@@ -9,7 +9,7 @@
     "url": "https://github.com/MVPWorkshop/metamask-snap-bitcoin.git"
   },
   "scripts": {
-    "build": "mm-snap build",
+    "build:snap": "mm-snap build",
     "start": "mm-snap serve"
   },
   "dependencies": {

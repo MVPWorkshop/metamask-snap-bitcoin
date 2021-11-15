@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "nodemon index.js",
-		"run-node": "./bcoin/bin/bcoin",
+		"run:node": "./bcoin/bin/bcoin",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [
