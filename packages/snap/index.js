@@ -85,14 +85,19 @@ async function getBalance(_account, _network) {
 	return result.balance;
 }
 
-async function _createUtxoToSpend(_amount, _account) {
-	const txId = await fetch(routes.sendToAddressRoute, {
+async function _createUtxoToSpend(_amount, _account, _network) {
+	const network = _network === 'testnet' ? 'testnet' : 'main';
+
+	const response = await fetch(routes.sendToAddressRoute, {
 		method: 'POST',
 		account: _account,
 		amount: _amount,
+		network: network,
 	});
 
-	return txId;
+	const result = await response.json();
+
+	return result.txId;
 }
 
 async function createTransaction(
@@ -126,7 +131,7 @@ async function createTransaction(
 
 	const txBuilder = new bitcoin.TransactionBuilder(network);
 
-	const txId = _createUtxoToSpend(_amount, sender);
+	const txId = _createUtxoToSpend(_amount, sender, _network);
 	const vout = 0;
 
 	// const PRIV_KEY = await wallet.request({
