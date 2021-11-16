@@ -11,7 +11,7 @@ Be sure to have installed the following
 - [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [Node.js](https://nodejs.org/en/download/)
 - [Yarn](https://yarnpkg.com/getting-started/install) 
-- [MetaMask]()
+- [MetaMask](/README.md#getting-metamask-running-in-your-local-environment)
 
 ### Getting MetaMask running in your local environment
 
