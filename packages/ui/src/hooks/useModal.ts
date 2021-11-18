@@ -5,7 +5,6 @@ const useModal = () => {
 
 	const toggleModal = () => {
 		setIsVisible(!isVisible);
-		console.log(!isVisible, 'ovdee');
 	};
 
 	return { isVisible, toggleModal };

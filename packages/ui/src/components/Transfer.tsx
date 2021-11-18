@@ -5,7 +5,11 @@ import ModalSend from '../pages/ModalSend';
 import Button from './Button';
 import './Transfer.css';
 
-export default function Transfer() {
+interface TransferProps {
+	account: string | null | undefined;
+}
+
+export default function Transfer(props: TransferProps) {
 	const { isReceiveVisible, toggleReceiveModal } = useReceiveModal();
 	const { isSendVisible, toggleSendModal } = useSendModal();
 	return (
@@ -16,11 +20,13 @@ export default function Transfer() {
 				isVisible={isReceiveVisible}
 				hideModal={toggleReceiveModal}
 				address={'bc1qa5wkgaew2dkv56kfvj49j0av5nml45x9ek9hz6'}
+				// address={props.account}
 			/>
 			<ModalSend
 				isVisible={isSendVisible}
 				hideModal={toggleSendModal}
 				address={'bc1qa5wkgaew2dkv56kfvj49j0av5nml45x9ek9hz6'}
+				// address={props.account}
 			/>
 		</div>
 	);

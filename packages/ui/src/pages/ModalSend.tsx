@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Button from '../components/Button';
 import '../components/Input.css';
+import useCreateTransaction from '../hooks/useCreateTransaction';
+import { ReduxContext } from '../redux/store';
 
 interface ModalSendProps {
 	isVisible: boolean;
@@ -10,10 +12,17 @@ interface ModalSendProps {
 }
 
 export default function ModalSend(props: ModalSendProps) {
+	const redux: any = useContext(ReduxContext);
+
 	const [amount, setAmount] = useState<number | undefined>(undefined);
 	const [recipientAddress, setRecipientAddress] = useState<string | undefined>(
 		undefined
 	);
+
+	const { createTransaction } = useCreateTransaction(
+		process.env.REACT_APP_SNAP_ID!
+	);
+
 	return props.isVisible
 		? createPortal(
 				<div className='modalContainer'>
@@ -110,7 +119,15 @@ export default function ModalSend(props: ModalSendProps) {
 						</div>
 						<Button
 							text='Send BTC'
-							onClick={() => navigator.clipboard.writeText(props.address)}
+							// onClick={() => navigator.clipboard.writeText(props.address)}
+							onClick={() =>
+								createTransaction(
+									redux.state.network,
+									recipientAddress!,
+									amount!,
+									3
+								)
+							}
 							style={{
 								width: '100%',
 								height: '10%',

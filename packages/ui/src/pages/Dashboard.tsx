@@ -6,8 +6,7 @@ import useConnect from '../hooks/useConnect';
 import './Dashboard.css';
 
 export default function Dashboard() {
-	const snapId = `http://localhost:8081/package.json`;
-	const { connect, error } = useConnect(snapId);
+	const { connect, error } = useConnect(process.env.REACT_APP_SNAP_ID!);
 
 	return (
 		<div className='container'>
