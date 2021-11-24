@@ -22,28 +22,8 @@ wallet.registerRpcMessageHandler(async (originString, requestObject) => {
 });
 
 async function getAccount(network) {
-	// const PRIV_KEY = await wallet.request({
-	// 	method: 'snap_getAppKey',
-	// });
-
-	// const privateKeyBuffer = Buffer.from(`${PRIV_KEY}`, 'hex');
-	// const keyPair = bitcoin.ECPair.fromPrivateKey(privateKeyBuffer);
-
 	const keyPair = _getKeyPair();
 
-	// if (network === 'testnet') {
-	// 	const { address } = bitcoin.payments.p2pkh({
-	// 		pubkey: keyPair.publicKey,
-	// 		network: bitcoin.networks.testnet,
-	// 	});
-	// 	return address;
-	// } else {
-	// 	const { address } = bitcoin.payments.p2pkh({
-	// 		pubkey: keyPair.publicKey,
-	// 		network: bitcoin.networks.bitcoin,
-	// 	});
-	// 	return address;
-	// }
 	const address =
 		network === 'testnet'
 			? _generateAddress(keyPair, bitcoin.networks.testnet)
@@ -106,17 +86,6 @@ async function createTransaction(
 	_amount,
 	_blockConfirmations
 ) {
-	// const txb = new bitcoin.TransactionBuilder(network);
-	// txb.addInput('TX_ID', TX_VOUT);
-	// txb.addOutput(p2pkhBob0.address, 5e7); // the actual "spend"
-	// txb.addOutput(p2pkhAlice1.address, 499e5); // Alice's change
-
-	// The miner fee is calculated by subtracting the outputs from the inputs.
-	// 100 000 000 - (50 000 000 + 49 900 000) = 100 000
-	// 100 000 satoshis equals 0,001 BTC, this is the miner fee.
-
-	//creating and signing a standard p2pkh transaction
-
 	const network =
 		_network === 'testnet'
 			? bitcoin.networks.testnet
@@ -134,14 +103,6 @@ async function createTransaction(
 	const txId = _createUtxoToSpend(_amount, sender, _network);
 	const vout = 0;
 
-	// const PRIV_KEY = await wallet.request({
-	// 	method: 'snap_getAppKey',
-	// });
-
-	// const privateKeyBuffer = Buffer.from(`${PRIV_KEY}`, 'hex');
-	// const keyPair = bitcoin.ECPair.fromPrivateKey(privateKeyBuffer);
-
-	// const estimatedFee = 0;
 	const response = await fetch(routes.estimateFeeRoute, {
 		method: 'POST',
 		blocks: _blockConfirmations,
@@ -161,7 +122,6 @@ async function createTransaction(
 	const transaction = txBuilder.build();
 	const transactionId = transaction.toHex();
 
-	// BROADCAST tx
 	await fetch(routes.broadcastRoute, {
 		method: 'POST',
 		txHash: transactionId,

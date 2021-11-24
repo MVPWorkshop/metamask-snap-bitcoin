@@ -12,7 +12,6 @@ export default function Dropdown(props: DropdownProps) {
 
 	return (
 		<div className='select'>
-			{/* <div className='select_arrow'></div> */}
 			<select
 				onChange={(ev) =>
 					redux.dispatch({ type: CHANGE_NETWORK, payload: ev.target.value })

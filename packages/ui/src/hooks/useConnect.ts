@@ -2,11 +2,12 @@ import { useState } from 'react';
 
 const useConnect = (snapId: string) => {
 	const [error, setError] = useState<string | null>(null);
+	const [isConnected, setIsConnected] = useState<boolean>(false);
 
 	const connect = async () => {
 		if ((window as any).ethereum) {
 			try {
-				await (window as any).ethereum.request({
+				const callback = await (window as any).ethereum.request({
 					method: 'wallet_enable',
 					params: [
 						{
@@ -14,6 +15,10 @@ const useConnect = (snapId: string) => {
 						},
 					],
 				});
+
+				if (!!callback.plugins) {
+					setIsConnected(true);
+				}
 			} catch (error: any) {
 				setError(error?.message);
 			}
@@ -22,7 +27,7 @@ const useConnect = (snapId: string) => {
 		}
 	};
 
-	return { connect, error };
+	return { connect, error, isConnected };
 };
 
 export default useConnect;

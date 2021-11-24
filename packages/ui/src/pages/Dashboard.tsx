@@ -6,14 +6,23 @@ import useConnect from '../hooks/useConnect';
 import './Dashboard.css';
 
 export default function Dashboard() {
-	const { connect, error } = useConnect(process.env.REACT_APP_SNAP_ID!);
+	const { connect, error, isConnected } = useConnect(
+		process.env.REACT_APP_SNAP_ID!
+	);
 
 	return (
 		<div className='container'>
-			<Header />
-			<Account />
-			<Button text='Connect' onClick={connect} />
-			{error && <p>{error}</p>}
+			{isConnected ? (
+				<>
+					<Header />
+					<Account />
+				</>
+			) : (
+				<div className='connectContainer'>
+					<Button text='Connect' onClick={connect} />
+					{error && <p>{error}</p>}
+				</div>
+			)}
 		</div>
 	);
 }

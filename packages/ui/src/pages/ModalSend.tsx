@@ -89,7 +89,6 @@ export default function ModalSend(props: ModalSendProps) {
 								}}>
 								From account
 							</span>
-							{/* <Input value={props.address} readonly={true} /> */}
 							<input
 								className='input'
 								type='text'

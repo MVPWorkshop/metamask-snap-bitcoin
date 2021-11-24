@@ -12,7 +12,6 @@ export default function Header() {
 				style={{
 					borderRadius: '50%',
 					height: '30px',
-					// float: 'left',
 				}}></img>
 			<Dropdown options={[Network.Bitcoin, Network.Testnet]} />
 		</div>

@@ -1,8 +1,3 @@
-/* #modal-root {
-	position: relative;
-	z-index: 999;
-} */
-
 .modalContainer {
 	position: fixed;
 	top: 0;
@@ -20,7 +15,6 @@
 .modal {
 	width: 25vw;
 	height: 55vh;
-	/* background-color: #f7f8fa; */
 	background-image: linear-gradient(#f7f8fa, #ffffff);
 	margin: 15% auto;
 	padding: 20px;
